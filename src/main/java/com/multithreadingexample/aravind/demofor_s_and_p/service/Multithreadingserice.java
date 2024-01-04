@@ -9,9 +9,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
 @Component
+
+
 public class Multithreadingserice implements CommandLineRunner {
 
     @Override
@@ -25,13 +29,15 @@ public class Multithreadingserice implements CommandLineRunner {
 
         String serviceUrl = "http://localhost:8080/api/random";
 
-        // Submit tasks to the executor
-        for (int i = 0; i < numThreads; i++) {
-            Callable<Integer> task = new RestServiceTask(serviceUrl);
-            Future<Integer> future = executorService.submit(task);
-            futures.add(future);
-        }
+      
+        List<Callable<Integer>> tasks= new ArrayList<>();
+        
+            for (int i = 0; i < numThreads; i++) {
+                Callable<Integer> task = new RestServiceTask(serviceUrl);
+            tasks.add(task);
 
+        }
+      futures=  executorService.invokeAll(tasks);
        
         executorService.shutdown();
 

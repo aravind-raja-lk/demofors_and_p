@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.multithreadingexample.aravind.demofor_s_and_p.service.Multithreadingserice;
 
+
 import java.util.Random;
 
 @RestController
 @RequestMapping("/api")
+
+
 public class RandomNumberController {
 
     private final Random random = new Random();
@@ -19,6 +22,7 @@ public class RandomNumberController {
     public Multithreadingserice multithreadingserice;
 
     @GetMapping(value = "/random")
+      
     public int getRandomNumber() {
         return generateRandomNumber();
     }
@@ -27,6 +31,7 @@ public class RandomNumberController {
         return random.nextInt(100);  
     }
        @GetMapping(value = "/thread")
+      
     public void runThread() throws Exception {
          multithreadingserice.run();
     }
