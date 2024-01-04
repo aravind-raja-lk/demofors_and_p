@@ -1,5 +1,6 @@
 package com.multithreadingexample.aravind.demofor_s_and_p.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import java.util.Random;
 public class RandomNumberController {
 
     private final Random random = new Random();
+    @Autowired
+    public Multithreadingserice multithreadingserice;
 
     @GetMapping(value = "/random")
     public int getRandomNumber() {
@@ -25,7 +28,7 @@ public class RandomNumberController {
     }
        @GetMapping(value = "/thread")
     public void runThread() throws Exception {
-         new Multithreadingserice().run();
+         multithreadingserice.run();
     }
 
 }
